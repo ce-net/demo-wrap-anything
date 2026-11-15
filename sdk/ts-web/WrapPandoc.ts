@@ -9,7 +9,7 @@ export const NETFIND_SCHEMA = 16424429642170228184n; // net.find v1 (ce-wire src
 // ---- runtime: postcard codec, ce-wire framing, client plumbing (browser: WebSocket + WebCrypto, generated, identical in every file) ----
 
 export const DEADLINE_MS = 1000; // net.mesh failover stalls 0.84-1.9 s, then the caller reconnects
-export const CALL_DEADLINE_MS = 8000; // a call waits 8 s for its answer (Leif 2026-11-07 12:25 CST: "it cant fail in under a second it needs to keep trying"); dialing keeps DEADLINE_MS
+export const CALL_DEADLINE_MS = 8000; // a call waits 8 s for its answer (a call must keep trying, not fail in under a second); dialing keeps DEADLINE_MS
 export const SPAWN_WAIT_MS = 10000;
 export const DOOR_PORT = 7700;
 const HEADER = 17;
@@ -800,8 +800,7 @@ async function connectWeb(g: Grant, waitMs: number, instance = ''): Promise<Conn
 }
 
 // --- Link: the client state machine every typed client shares (same states, words and rules as ce_wire::Link in
-// Rust and the py / swift runtimes). Leif 2026-10-14 17:35: "auto generate typed clients ... so its typed safe with
-// the state machine in all languages".
+// Rust and the py / swift runtimes): generated typed clients share one state machine in all languages.
 //   idle -> finding -> live <-> stale ; any failure -> reconnecting (1 s doubling to 20 s) -> finding ;
 //   refused (gate, right, schema, unknown op: waiting cannot help) and failed (max_attempts spent) end the link.
 

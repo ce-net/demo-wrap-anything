@@ -57,7 +57,7 @@ and so may a resized PNG.
 
 ### As a cell on your own node
 
-With a ce node running on the machine (its door on this machine), and access to the ce-wire crates:
+Building the cell needs the ce-wire and ce-gate crates, a dependency that is not public yet, so this build does not work outside the network today. With a ce node running on the machine (its door on this machine), and access to those crates:
 
 ```sh
 (cd cell && cargo build --release)
