@@ -1,0 +1,11 @@
+# The public part: the allowlist, the limits and the plain local run (`wrap-tool local`). Builds from crates.io only.
+# The mesh cell is in cell/ (its own workspace: it needs the ce-wire and ce-gate crates).
+[workspace]
+resolver = "2"
+members = ["crates/wrap-tool"]
+
+[profile.release]
+opt-level = "s"
+lto = true
+codegen-units = 1
+strip = true

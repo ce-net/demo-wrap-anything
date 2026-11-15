@@ -1,0 +1,52 @@
+# wrap.convert@1: ImageMagick `convert` (ImageMagick License, an Apache-2.0-style permissive license).
+# Only what is listed here can reach the program. The input file is passed with an explicit coder prefix
+# (`png:in.png`), so a file that claims to be a PNG can never be read by another coder (MVG, MSL, SVG, URL...).
+api = "wrap.convert"
+license = "ImageMagick License (permissive, Apache-2.0 style)"
+bin = ["convert"]
+version_args = ["-version"]
+prefix = []
+in_ext = ["png", "jpg", "gif", "webp", "bmp"]
+out_ext = ["png", "jpg", "gif", "webp"]
+in_magic = true
+coder_prefix = true
+out_required = true
+positional = ""
+max_in_bytes = 4194304
+max_out_bytes = 4194304
+max_stdio_bytes = 65536
+timeout_ms = 10000
+cpu_s = 10
+mem_mb = 1024
+max_args = 24
+concurrency = 2
+
+[env]
+MAGICK_MEMORY_LIMIT = "256MiB"
+MAGICK_MAP_LIMIT = "512MiB"
+MAGICK_DISK_LIMIT = "0"
+MAGICK_AREA_LIMIT = "64MP"
+MAGICK_WIDTH_LIMIT = "8192"
+MAGICK_HEIGHT_LIMIT = "8192"
+MAGICK_TIME_LIMIT = "10"
+MAGICK_THREAD_LIMIT = "1"
+
+[flags]
+"-resize" = "geometry"
+"-thumbnail" = "geometry"
+"-rotate" = "num:-360:360"
+"-blur" = "geometry"
+"-sharpen" = "geometry"
+"-quality" = "int:1:100"
+"-colorspace" = "enum:Gray|sRGB|RGB|CMYK"
+"-sepia-tone" = "geometry"
+"-modulate" = "geometry"
+"-flip" = "none"
+"-flop" = "none"
+"-negate" = "none"
+"-strip" = "none"
+"-monochrome" = "none"
+"-auto-orient" = "none"
+"-trim" = "none"
+"-identify" = "none"
+"-verbose" = "none"

@@ -1,0 +1,36 @@
+# wrap.pandoc@1: pandoc (GPL-2.0-or-later). It runs unmodified as a separate program; this repo does not ship it.
+# `--sandbox` is always first: pandoc then reads and writes no file but the ones it was given, and no network.
+api = "wrap.pandoc"
+license = "GPL-2.0-or-later (run unmodified as a separate program, not distributed here)"
+bin = ["pandoc"]
+version_args = ["--version"]
+prefix = ["--sandbox"]
+in_ext = ["md", "txt", "html", "rst", "org", "docx", "odt", "epub", "tex"]
+out_ext = ["html", "md", "txt", "rst", "org", "docx", "odt", "epub", "tex"]
+in_magic = false
+coder_prefix = false
+out_required = false
+positional = ""
+max_in_bytes = 2097152
+max_out_bytes = 4194304
+max_stdio_bytes = 1048576
+timeout_ms = 15000
+cpu_s = 15
+mem_mb = 1024
+max_args = 16
+concurrency = 2
+
+[env]
+
+[flags]
+"-f" = "enum:markdown|gfm|commonmark|html|rst|org|docx|odt|epub|latex"
+"--from" = "enum:markdown|gfm|commonmark|html|rst|org|docx|odt|epub|latex"
+"-t" = "enum:html|html5|gfm|commonmark|markdown|plain|rst|org|docx|odt|epub|latex|json"
+"--to" = "enum:html|html5|gfm|commonmark|markdown|plain|rst|org|docx|odt|epub|latex|json"
+"-o" = "out"
+"-s" = "none"
+"--standalone" = "none"
+"--toc" = "none"
+"--wrap" = "enum:auto|none|preserve"
+"--columns" = "int:10:400"
+"--shift-heading-level-by" = "int:-5:5"

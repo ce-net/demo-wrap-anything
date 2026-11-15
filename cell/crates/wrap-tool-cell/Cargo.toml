@@ -1,0 +1,17 @@
+[package]
+name = "wrap-tool-cell"
+version = "0.1.0"
+edition = "2021"
+license = "Apache-2.0"
+description = "The wrap.<tool>@1 cells (wrap.convert, wrap.pandoc, wrap.jq) behind a ce-wire door, gated by ce-cap"
+
+[[bin]]
+name = "wrap-tool-cell"
+path = "src/main.rs"
+
+[dependencies]
+wrap-tool = { path = "../../../crates/wrap-tool" }
+wrap-tool-api = { path = "../wrap-tool-api" }
+ce-wire = { git = "https://github.com/Leif-Rydenfalk/rust-stack", rev = "5225209", default-features = false, features = ["blocking-door"] }
+ce-gate = { git = "https://github.com/Leif-Rydenfalk/rust-stack", rev = "5225209" }
+serde_json = "1"
