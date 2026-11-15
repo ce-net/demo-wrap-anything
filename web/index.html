@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Wrap anything · ce-net</title>
+<meta name="description" content="Any program becomes a mesh service in one command. ImageMagick, pandoc and jq run as cells behind an argument allowlist, with the same stdout, stderr and exit code as running them locally.">
+<meta name="theme-color" content="#070807">
+<link rel="canonical" href="https://ce-net.com/demos/wrap/">
+<meta property="og:title" content="Wrap anything · ce-net">
+<meta property="og:description" content="Any program becomes a mesh service in one command, with the same stdout, stderr and exit code as running it locally.">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/components.css">
+<script>try{if(localStorage.getItem('ce-theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}</script>
+<style>
+.page{max-width:1180px;margin:0 auto;padding:22px 24px 64px}
+header.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:34px}
+.brand{font:600 15px var(--sans);letter-spacing:-.01em;color:var(--ink);text-decoration:none}
+.lede{max-width:640px;color:var(--ink-2);font:400 14px/1.6 var(--sans);margin:0 0 26px}
+.grid{display:grid;grid-template-columns:1.05fr 1fr;gap:12px}
+.card{padding:16px}
+.card h2{margin:0 0 4px;font:500 9.5px var(--sans);letter-spacing:var(--track-label);text-transform:uppercase;color:var(--ink-2)}
+.card p.sub{margin:0 0 12px;color:var(--faint);font:400 11px/1.5 var(--mono)}
+.term{background:var(--well);border:1px solid var(--line);border-radius:var(--r-sm);padding:12px;height:360px;overflow:auto;
+  font:400 11.5px/1.55 var(--mono);color:var(--ink);white-space:pre-wrap;word-break:break-word}
+.term .p{color:var(--acc)}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:10px}
+.drop{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-height:150px;
+  border:1px dashed var(--line-2);border-radius:var(--r-sm);color:var(--ink-2);font:400 12px var(--mono);text-align:center;padding:14px;cursor:pointer}
+.drop.over{border-color:var(--acc);color:var(--acc);background:var(--acc-soft)}
+.drop b{font:500 10px var(--sans);letter-spacing:var(--track-label);text-transform:uppercase;color:var(--ink)}
+.imgs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.imgs figure{margin:0;background:var(--well);border:1px solid var(--line);border-radius:var(--r-sm);min-height:120px;display:flex;flex-direction:column}
+.imgs img{max-width:100%;max-height:220px;object-fit:contain;margin:auto;display:block}
+.imgs figcaption{font:400 10px var(--mono);color:var(--faint);padding:6px 8px;border-top:1px solid var(--line)}
+dl.kv{display:grid;grid-template-columns:max-content 1fr;gap:0;margin:10px 0 0;font:400 11px/1.4 var(--mono)}
+dl.kv dt,dl.kv dd{margin:0;padding:6px 0;border-top:1px solid var(--line)}
+dl.kv dt{color:var(--ink-2);padding-right:14px;font:500 9.5px/1.9 var(--sans);letter-spacing:var(--track-label);text-transform:uppercase}
+dl.kv dd{word-break:break-all;color:var(--ink)}
+dd .ok{color:var(--ok)}dd .bad{color:var(--bad)}
+.state{font:400 11px/1.5 var(--mono);color:var(--ink-2);margin-top:10px}
+.state.bad{color:var(--bad)}
+select{background:var(--well);color:var(--ink);border:1px solid var(--line-2);border-radius:var(--r-sm);font:400 11px var(--mono);padding:7px 8px;min-height:32px}
+.wide{grid-column:1/-1}
+.grid>*,.imgs>*,dl.kv dd{min-width:0}
+body{overflow-x:hidden}
+.tablewrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font:400 11px/1.4 var(--mono);font-variant-numeric:tabular-nums}
+th{font:500 9px var(--sans);letter-spacing:var(--track-label);text-transform:uppercase;color:var(--ink-2);text-align:left;padding:8px 8px 8px 0;border-bottom:1px solid var(--line-2);white-space:nowrap}
+td{padding:7px 8px 7px 0;border-bottom:1px solid var(--line);vertical-align:top;white-space:nowrap}
+td.y{color:var(--ok)}td.n{color:var(--bad)}
+td small{color:var(--faint)}
+code{font:400 11px var(--mono);color:var(--ink)}
+.howto{font:400 11.5px/1.7 var(--mono);color:var(--ink-2);background:var(--well);border:1px solid var(--line);border-radius:var(--r-sm);padding:10px 12px;white-space:pre-wrap;margin:8px 0 0}
+footer{margin-top:28px;color:var(--faint);font:400 10.5px var(--mono)}
+footer a{color:var(--ink-2)}
+@media (max-width:860px){.grid{grid-template-columns:1fr}.term{height:300px}}
+@media (max-width:600px){.page{padding:16px 16px 48px}.imgs{grid-template-columns:1fr}.btns .btn.quiet{display:none}}
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="top">
+    <a class="brand" href="/">ce</a>
+    <nav class="btns glass">
+      <a class="btn quiet" href="/demos/">All demos</a>
+      <a class="btn quiet" href="https://github.com/ce-net/demo-wrap-anything">Source</a>
+      <button class="btn" id="theme" aria-label="Switch light and dark">Light</button>
+    </nav>
+  </header>
+
+  <div class="crumb">Demos / <b>Wrap anything</b></div>
+  <h1 class="display lg">Any program, a mesh service.</h1>
+  <p class="lede">One command turns ImageMagick, pandoc or jq into a cell on the network. Any device can call it.
+    Only the flags on its allowlist reach the program, with limits on size, time and memory. It gives back the same
+    stdout, stderr and exit code you would get running it yourself, plus the hash of the exact program that ran.</p>
+
+  <div class="stats" id="stats" style="margin-bottom:12px">
+    <div class="glass ticks stat"><div class="label"><i></i>Parity cases</div><div class="num acc" id="s-cases">-</div><div class="sub" id="s-cases-sub">from the parity test</div></div>
+    <div class="glass stat"><div class="label"><i class="g"></i>Identical</div><div class="num" id="s-same">-</div><div class="sub">stdout, stderr, exit, output</div></div>
+    <div class="glass stat"><div class="label"><i></i>Wrapped tools</div><div class="num">3</div><div class="sub">convert · pandoc · jq</div></div>
+  </div>
+
+  <div class="grid">
+    <section class="glass card" aria-labelledby="h-rec">
+      <h2 id="h-rec">The one command, recorded</h2>
+      <p class="sub" id="rec-sub">A real terminal session, replayed at its own speed.</p>
+      <div class="term" id="term" role="log" aria-live="off"></div>
+      <div class="row"><button class="btn" id="replay">Replay</button></div>
+    </section>
+
+    <section class="glass card" aria-labelledby="h-drop">
+      <h2 id="h-drop">Drop an image</h2>
+      <p class="sub">It is converted by wrap.convert@1 on a node of the network, not in this browser.</p>
+      <label class="drop" id="drop" tabindex="0">
+        <b>Drop a PNG, JPEG, GIF, WebP or BMP</b>
+        <span>or click to choose · up to 4 MiB</span>
+        <input type="file" id="file" accept="image/png,image/jpeg,image/gif,image/webp,image/bmp" hidden>
+      </label>
+      <div class="row">
+        <select id="op" aria-label="Conversion">
+          <option value="half">Resize 50%, PNG</option>
+          <option value="gray">Grayscale, JPEG quality 80</option>
+          <option value="rot">Rotate 90°, WebP</option>
+          <option value="sepia">Sepia 80%, PNG</option>
+        </select>
+        <button class="btn primary" id="go" disabled>Convert</button>
+        <button class="btn quiet" id="sample">Use a sample image</button>
+      </div>
+      <div class="state" id="state">Connecting…</div>
+      <div class="imgs" id="imgs" hidden>
+        <figure><img id="img-in" alt="The image you dropped"><figcaption id="cap-in"></figcaption></figure>
+        <figure><img id="img-out" alt="The converted image"><figcaption id="cap-out"></figcaption></figure>
+      </div>
+      <dl class="kv" id="result" hidden></dl>
+    </section>
+
+    <section class="glass card wide" aria-labelledby="h-par">
+      <h2 id="h-par">Parity: local vs wrapped</h2>
+      <p class="sub" id="par-sub">Each case runs twice: plainly on the calling machine, and through the cell on another
+        node. Hashes are sha256, first 12 hex digits.</p>
+      <div class="tablewrap"><table id="par"><thead><tr>
+        <th>Tool</th><th>Case</th><th>Exit</th><th>Stdout</th><th>Stderr</th><th>Output</th><th>Program</th><th>Same</th>
+      </tr></thead><tbody></tbody></table></div>
+    </section>
+
+    <section class="glass card wide" aria-labelledby="h-local">
+      <h2 id="h-local">Check a result yourself</h2>
+      <p class="sub">Every answer carries the argv that ran and the sha256 of the program file. Run the same argv on the
+        same program version and compare.</p>
+      <pre class="howto" id="howto">mkdir w && cd w && cp ~/your-image.png in.png
+convert png:in.png -resize 50% -strip out.png
+sha256sum out.png                      # = output_cid
+sha256sum "$(readlink -f "$(command -v convert)")"   # = artifact_sha256 (same build)</pre>
+    </section>
+  </div>
+
+  <footer>Apache-2.0 · <a href="https://github.com/ce-net/demo-wrap-anything">github.com/ce-net/demo-wrap-anything</a>
+    · ImageMagick (ImageMagick License), jq (MIT), pandoc (GPL-2.0-or-later) run unmodified as separate programs.</footer>
+</div>
+
+<script type="module">
+import { WrapConvertClient, grantFromLink } from './lib/wrap-convert.js';
+const $ = (id) => document.getElementById(id);
+const short = (h) => (h || '').replace(/^sha256:/, '').slice(0, 12);
+const hex = (buf) => [...new Uint8Array(buf)].map((b) => b.toString(16).padStart(2, '0')).join('');
+const sha = async (b) => hex(await crypto.subtle.digest('SHA-256', b));
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+
+// theme
+const setTheme = (t) => { if (t === 'light') document.documentElement.dataset.theme = 'light'; else delete document.documentElement.dataset.theme; $('theme').textContent = t === 'light' ? 'Dark' : 'Light'; try { localStorage.setItem('ce-theme', t); } catch (e) {} };
+setTheme(document.documentElement.dataset.theme === 'light' ? 'light' : 'dark');
+$('theme').onclick = () => setTheme(document.documentElement.dataset.theme === 'light' ? 'dark' : 'light');
+
+// recording
+let rec = null, timers = [];
+function play() {
+  timers.forEach(clearTimeout); timers = [];
+  const t = $('term'); t.textContent = '';
+  for (const [at, text] of rec.frames) timers.push(setTimeout(() => {
+    for (const line of text.split(/(\n)/)) {
+      if (line.startsWith('$ ')) { const s = document.createElement('span'); s.className = 'p'; s.textContent = line; t.append(s); }
+      else t.append(line);
+    }
+    t.scrollTop = t.scrollHeight;
+  }, Math.min(at, 30) * 1000 + 300));
+}
+fetch('recording.json').then((r) => r.json()).then((j) => { rec = j; $('rec-sub').textContent = `A real terminal session, recorded ${j.recorded.replace('T', ' ').replace('Z', ' UTC')}, replayed at its own speed.`; play(); });
+$('replay').onclick = () => rec && play();
+
+// parity table
+fetch('parity.json').then((r) => r.json()).then((docs) => {
+  const tb = document.querySelector('#par tbody');
+  let n = 0, same = 0;
+  for (const d of docs) for (const r of d.rows) {
+    n++;
+    const ok = r.same_stdout && r.same_stderr && r.same_exit && r.same_output;
+    if (ok) same++;
+    const pair = (a, b) => a === b ? `${esc(short(a)) || '<small>none</small>'}` : `${esc(short(a))} / ${esc(short(b))}`;
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${esc(r.tool)}</td><td>${esc(r.case)}</td><td>${r.local.exit} / ${r.wrapped.exit}</td>
+      <td>${pair(r.local.stdout_sha256, r.wrapped.stdout_sha256)}</td><td>${pair(r.local.stderr_sha256, r.wrapped.stderr_sha256)}</td>
+      <td>${pair(r.local.output_cid, r.wrapped.output_cid)}</td>
+      <td>${esc(r.local.os_arch)} → ${esc(r.wrapped.os_arch)}<br><small>${esc(short(r.local.artifact_sha256))} → ${esc(short(r.wrapped.artifact_sha256))}</small></td>
+      <td class="${ok ? 'y' : 'n'}">${ok ? 'yes' : 'no'}</td>`;
+    tb.append(tr);
+    if (r.note) { const nr = document.createElement('tr'); nr.innerHTML = `<td></td><td colspan="7" style="white-space:normal"><small>${esc(r.note)}</small></td>`; tb.append(nr); }
+  }
+  $('s-cases').textContent = n; $('s-same').innerHTML = `${same}<small>/ ${n}</small>`;
+  $('s-cases-sub').textContent = `one machine and two machines`;
+  $('par-sub').textContent += ' Runs on ' + docs[0].when + ': ' + docs.map((d, i) => `${i ? 'then ' : 'first '}${d.label} (${d.rows.length} cases)`).join(', ') + '.';
+});
+
+// drop zone -> wrap.convert@1 over wire.ws-door
+const OPS = {
+  half: { args: ['{in}', '-resize', '50%', '-strip', '{out}'], out: 'png' },
+  gray: { args: ['{in}', '-colorspace', 'Gray', '-quality', '80', '-strip', '{out}'], out: 'jpg' },
+  rot: { args: ['{in}', '-rotate', '90', '-strip', '{out}'], out: 'webp' },
+  sepia: { args: ['{in}', '-sepia-tone', '80%', '-strip', '{out}'], out: 'png' },
+};
+const MIME = { png: 'image/png', jpg: 'image/jpeg', webp: 'image/webp', gif: 'image/gif', bmp: 'image/bmp' };
+function sniff(b) {
+  if (b[0] === 0x89 && b[1] === 0x50) return 'png';
+  if (b[0] === 0xff && b[1] === 0xd8) return 'jpg';
+  if (b[0] === 0x47 && b[1] === 0x49) return 'gif';
+  if (b[0] === 0x52 && b[8] === 0x57) return 'webp';
+  if (b[0] === 0x42 && b[1] === 0x4d) return 'bmp';
+  return null;
+}
+let client = null, input = null, inExt = null;
+const state = (s, bad) => { $('state').textContent = s; $('state').className = 'state' + (bad ? ' bad' : ''); };
+(async () => {
+  const g = grantFromLink();
+  if (!g) { state('This page needs a grant link to reach the network (#g=…). The public door is not open yet; the recording and parity table above are from live runs.'); return; }
+  try {
+    client = await WrapConvertClient.connect(g);
+    const p = await client.describe();
+    state(`Connected to wrap.convert@1 on node ${p.tool.node} (${p.tool.os_arch}), ${p.tool.version.replace('Version: ', '').split(' https')[0]}.`);
+    $('go').disabled = !input;
+  } catch (e) { state(`Could not reach wrap.convert@1: ${e.message || e}`, true); }
+})();
+async function take(f) {
+  if (!f) return;
+  if (f.size > 4 << 20) { state('That file is over 4 MiB, the cell would refuse it.', true); return; }
+  input = new Uint8Array(await f.arrayBuffer());
+  inExt = sniff(input);
+  if (!inExt) { state('That is not a PNG, JPEG, GIF, WebP or BMP file.', true); input = null; return; }
+  $('img-in').src = URL.createObjectURL(new Blob([input], { type: MIME[inExt] }));
+  $('cap-in').textContent = `${f.name} · ${input.length.toLocaleString()} bytes · sha256 ${short(await sha(input))}`;
+  $('img-out').removeAttribute('src'); $('cap-out').textContent = '';
+  $('imgs').hidden = false; $('result').hidden = true;
+  $('go').disabled = !client;
+  if (client) convert();
+}
+async function convert() {
+  if (!client || !input) return;
+  const op = OPS[$('op').value];
+  $('go').disabled = true; state('Converting on the network…');
+  const t0 = performance.now();
+  try {
+    const r = await client.run({ args: op.args, input, in_ext: inExt, out_ext: op.out });
+    if ('err' in r) { const [k, v] = Object.entries(r.err)[0]; state(`${k}: ${v}`, true); return; }
+    const o = r.ok;
+    const mine = o.output.length ? 'sha256:' + await sha(o.output) : '';
+    if (o.output.length) $('img-out').src = URL.createObjectURL(new Blob([o.output], { type: MIME[op.out] }));
+    $('cap-out').textContent = `out.${op.out} · ${o.output.length.toLocaleString()} bytes`;
+    const kv = [
+      ['exit', `${o.exit}${o.signal ? ' (' + o.signal + ')' : ''}`],
+      ['argv', o.argv.join(' ')],
+      ['output cid', `${o.output_cid} <span class="${mine === o.output_cid ? 'ok' : 'bad'}">${mine === o.output_cid ? 'checked in this browser' : 'does not match the bytes'}</span>`],
+      ['stdout sha256', o.stdout_sha256],
+      ['stderr sha256', o.stderr_sha256 + (o.stderr.length ? ' · ' + esc(new TextDecoder().decode(o.stderr).slice(0, 300)) : '')],
+      ['program', `${esc(o.tool.version.replace('Version: ', '').split(' https')[0])} · ${o.tool.os_arch}`],
+      ['artifact sha256', o.tool.artifact_sha256],
+      ['ran on node', o.tool.node],
+      ['time', `${o.ms} ms in the program, ${Math.round(performance.now() - t0)} ms round trip`],
+    ];
+    $('result').innerHTML = kv.map(([k, v]) => `<dt>${k}</dt><dd>${k === 'output cid' || k === 'stderr sha256' || k === 'program' ? v : esc(v)}</dd>`).join('');
+    $('result').hidden = false;
+    $('howto').textContent = `mkdir w && cd w && cp ~/your-image.${inExt} in.${inExt}\n${o.argv.join(' ')}\nsha256sum out.${op.out}    # ${o.output_cid.replace('sha256:', '')}\nsha256sum "$(readlink -f "$(command -v convert)")"    # ${o.tool.artifact_sha256} (${o.tool.os_arch})`;
+    state('Done.');
+  } catch (e) { state(`The call failed: ${e.message || e}`, true); }
+  finally { $('go').disabled = false; }
+}
+const drop = $('drop');
+drop.addEventListener('click', () => $('file').click());
+drop.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); $('file').click(); } });
+$('file').addEventListener('change', (e) => take(e.target.files[0]));
+drop.addEventListener('dragover', (e) => { e.preventDefault(); drop.classList.add('over'); });
+drop.addEventListener('dragleave', () => drop.classList.remove('over'));
+drop.addEventListener('drop', (e) => { e.preventDefault(); drop.classList.remove('over'); take(e.dataTransfer.files[0]); });
+$('go').onclick = convert;
+$('op').onchange = () => input && client && convert();
+const useSample = async () => { const b = await (await fetch('sample.png')).blob(); take(new File([b], 'sample.png', { type: 'image/png' })); };
+$('sample').onclick = useSample;
+if (new URLSearchParams(location.hash.slice(1)).get('auto') === '1') { const wait = setInterval(() => { if (client) { clearInterval(wait); useSample(); } }, 100); }
+</script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+[package]
+name = "wrap-tool-api"
+version = "0.1.0"
+edition = "2021"
+license = "Apache-2.0"
+description = "Typed API of the wrap.<tool>@1 cells (wrap.convert, wrap.pandoc, wrap.jq): types only"
+
+[dependencies]
+ce-wire = { git = "https://github.com/Leif-Rydenfalk/rust-stack", rev = "5225209", default-features = false, features = ["codec"] }

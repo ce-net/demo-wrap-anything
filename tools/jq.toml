@@ -1,0 +1,33 @@
+# wrap.jq@1: jq (MIT). The environment is empty, so `env` and `$ENV` show nothing, and a filter may not use
+# `import`, `include` or `modulemeta`, so it reads no file but its input.
+api = "wrap.jq"
+license = "MIT"
+bin = ["jq"]
+version_args = ["--version"]
+prefix = []
+in_ext = ["json"]
+out_ext = []
+in_magic = false
+coder_prefix = false
+out_required = false
+positional = "text:256:import|include|modulemeta|input_filename|$__loc__"
+max_in_bytes = 2097152
+max_out_bytes = 0
+max_stdio_bytes = 1048576
+timeout_ms = 5000
+cpu_s = 5
+mem_mb = 512
+max_args = 8
+concurrency = 2
+
+[env]
+
+[flags]
+"-c" = "none"
+"-r" = "none"
+"-S" = "none"
+"-e" = "none"
+"-j" = "none"
+"-s" = "none"
+"--tab" = "none"
+"--indent" = "int:0:7"

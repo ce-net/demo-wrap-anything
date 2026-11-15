@@ -1,0 +1,49 @@
+#!/bin/sh
+# wrap-up <convert|pandoc|jq>: the one command. Runs `wrap-tool-cell serve <tool>` as the wrap.<tool>@1 cell under
+# systemd --user (restart on crash, memory and CPU caps), then calls it over the mesh and prints what it serves.
+# Needs: a ce node on this machine (its door), the tool installed, and wrap-tool-cell built (cell/, cargo build --release).
+set -eu
+tool=${1:?usage: wrap-up <convert|pandoc|jq>}
+here=$(cd "$(dirname "$0")/.." && pwd)
+bin=${WRAP_TOOL_CELL:-${CARGO_TARGET_DIR:-$here/cell/target}/release/wrap-tool-cell}
+[ -x "$bin" ] || { echo "wrap-up: build the cell first: (cd cell && cargo build --release)" >&2; exit 1; }
+store=${XDG_DATA_HOME:-$HOME/.local/share}/demo-wrap-anything
+mkdir -p "$store" "$HOME/.config/systemd/user"
+h=$(sha256sum "$bin" | cut -c1-12)
+[ -e "$store/wrap-tool-cell-$h" ] || cp "$bin" "$store/wrap-tool-cell-$h"
+unit=ce-cell-wrap-$tool.service
+cat > "$HOME/.config/systemd/user/$unit" <<UNIT
+[Unit]
+Description=wrap.$tool cell (demo-wrap-anything)
+After=ce-door.service
+
+[Service]
+ExecStart=$store/wrap-tool-cell-$h serve $tool
+Environment=CE_CELL=wrap.$tool
+Environment=CE_CELL_VERSION=0.1.0+$h
+Restart=always
+RestartSec=3
+MemoryMax=1500M
+CPUQuota=200%
+
+[Install]
+WantedBy=default.target
+UNIT
+systemctl --user daemon-reload
+systemctl --user enable --now "$unit" >/dev/null 2>&1
+systemctl --user restart "$unit"
+desc=$here/sdk/json/wrap.$tool.json
+me=$(ce id | awk '/node id/ {print substr($NF, 1, 16)}')   # call this node's cell, not another holder's
+i=0
+until ce cell call "wrap.$tool" HealthOp --on "$me" --descriptor "$desc" >/dev/null 2>&1; do
+  i=$((i + 1)); [ $i -lt 150 ] || { echo "wrap-up: wrap.$tool did not answer" >&2; exit 1; }; sleep 0.2
+done
+ce cell call "wrap.$tool" Describe --on "$me" --descriptor "$desc" | python3 -c '
+import json, sys
+p = json.load(sys.stdin); t = p["tool"]
+print("wrap.%s@1 is up on node %s (%s)" % (t["name"], t["node"], t["os_arch"]))
+print("  program   %s" % t["version"])
+print("  artifact  sha256:%s" % t["artifact_sha256"])
+out = (", out " + "/".join(p["out_ext"])) if p["out_ext"] else ""
+print("  allows    %d flags, in %s%s" % (len(p["flags"]), "/".join(p["in_ext"]), out))
+print("  limits    %d MiB in, %d s, %d MiB memory, %d at a time" % (p["max_in_bytes"] >> 20, p["timeout_ms"] // 1000, p["mem_mb"], p["concurrency"]))'

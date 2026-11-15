@@ -1,0 +1,318 @@
+{
+  "all_match": true,
+  "caller": "c79d26491eaa3de8",
+  "rows": [
+    {
+      "argv": [
+        "convert",
+        "png:in.png",
+        "-resize",
+        "50%",
+        "-strip",
+        "out.png"
+      ],
+      "argv_match": true,
+      "case": "resize 50%",
+      "local": {
+        "artifact_sha256": "cf4c4db95ec867c9b0922d6a2c8c63cf30f53a5fd782c97a0d09ce48e869c88f",
+        "exit": 0,
+        "node": "c79d26491eaa3de8",
+        "os_arch": "linux-aarch64",
+        "output_cid": "sha256:11d3a4c84afe59dfcd3d2d76503e1f1f73246b1f18904556e29dec7cbaf5b31b",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "version": "Version: ImageMagick 6.9.11-60 Q16 aarch64 2021-01-25 https://imagemagick.org"
+      },
+      "same_exit": true,
+      "same_output": true,
+      "same_stderr": true,
+      "same_stdout": true,
+      "tool": "convert",
+      "wrapped": {
+        "artifact_sha256": "cf4c4db95ec867c9b0922d6a2c8c63cf30f53a5fd782c97a0d09ce48e869c88f",
+        "cid_reported": "sha256:11d3a4c84afe59dfcd3d2d76503e1f1f73246b1f18904556e29dec7cbaf5b31b",
+        "exit": 0,
+        "ms": 21,
+        "node": "c79d26491eaa3de8",
+        "os_arch": "linux-aarch64",
+        "output_cid": "sha256:11d3a4c84afe59dfcd3d2d76503e1f1f73246b1f18904556e29dec7cbaf5b31b",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "version": "Version: ImageMagick 6.9.11-60 Q16 aarch64 2021-01-25 https://imagemagick.org"
+      }
+    },
+    {
+      "argv": [
+        "convert",
+        "png:in.png",
+        "-colorspace",
+        "Gray",
+        "-quality",
+        "80",
+        "-strip",
+        "out.jpg"
+      ],
+      "argv_match": true,
+      "case": "grayscale to JPEG q80",
+      "local": {
+        "artifact_sha256": "cf4c4db95ec867c9b0922d6a2c8c63cf30f53a5fd782c97a0d09ce48e869c88f",
+        "exit": 0,
+        "node": "c79d26491eaa3de8",
+        "os_arch": "linux-aarch64",
+        "output_cid": "sha256:5201f31306ca72f62e1dbc0797ad13dcaa56a0df4f225ded61e7fd1d04f4ec7d",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "version": "Version: ImageMagick 6.9.11-60 Q16 aarch64 2021-01-25 https://imagemagick.org"
+      },
+      "same_exit": true,
+      "same_output": true,
+      "same_stderr": true,
+      "same_stdout": true,
+      "tool": "convert",
+      "wrapped": {
+        "artifact_sha256": "cf4c4db95ec867c9b0922d6a2c8c63cf30f53a5fd782c97a0d09ce48e869c88f",
+        "cid_reported": "sha256:5201f31306ca72f62e1dbc0797ad13dcaa56a0df4f225ded61e7fd1d04f4ec7d",
+        "exit": 0,
+        "ms": 21,
+        "node": "c79d26491eaa3de8",
+        "os_arch": "linux-aarch64",
+        "output_cid": "sha256:5201f31306ca72f62e1dbc0797ad13dcaa56a0df4f225ded61e7fd1d04f4ec7d",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "version": "Version: ImageMagick 6.9.11-60 Q16 aarch64 2021-01-25 https://imagemagick.org"
+      }
+    },
+    {
+      "argv": [
+        "convert",
+        "png:in.png",
+        "-rotate",
+        "90",
+        "-strip",
+        "out.webp"
+      ],
+      "argv_match": true,
+      "case": "rotate 90, WebP",
+      "local": {
+        "artifact_sha256": "cf4c4db95ec867c9b0922d6a2c8c63cf30f53a5fd782c97a0d09ce48e869c88f",
+        "exit": 0,
+        "node": "c79d26491eaa3de8",
+        "os_arch": "linux-aarch64",
+        "output_cid": "sha256:bbbe2aaba651b923a2fa17f300a8c8ca83027da096737fe4517faace4df354c7",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "version": "Version: ImageMagick 6.9.11-60 Q16 aarch64 2021-01-25 https://imagemagick.org"
+      },
+      "same_exit": true,
+      "same_output": true,
+      "same_stderr": true,
+      "same_stdout": true,
+      "tool": "convert",
+      "wrapped": {
+        "artifact_sha256": "cf4c4db95ec867c9b0922d6a2c8c63cf30f53a5fd782c97a0d09ce48e869c88f",
+        "cid_reported": "sha256:bbbe2aaba651b923a2fa17f300a8c8ca83027da096737fe4517faace4df354c7",
+        "exit": 0,
+        "ms": 22,
+        "node": "c79d26491eaa3de8",
+        "os_arch": "linux-aarch64",
+        "output_cid": "sha256:bbbe2aaba651b923a2fa17f300a8c8ca83027da096737fe4517faace4df354c7",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "version": "Version: ImageMagick 6.9.11-60 Q16 aarch64 2021-01-25 https://imagemagick.org"
+      }
+    },
+    {
+      "argv": [
+        "convert",
+        "png:in.png",
+        "out.png"
+      ],
+      "argv_match": true,
+      "case": "truncated PNG (error path)",
+      "local": {
+        "artifact_sha256": "cf4c4db95ec867c9b0922d6a2c8c63cf30f53a5fd782c97a0d09ce48e869c88f",
+        "exit": 1,
+        "node": "c79d26491eaa3de8",
+        "os_arch": "linux-aarch64",
+        "output_cid": "",
+        "stderr_sha256": "6d1007d20301d5182ac12cc8236639c5e915dee3454d9c0da5f49aebc653b17e",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "version": "Version: ImageMagick 6.9.11-60 Q16 aarch64 2021-01-25 https://imagemagick.org"
+      },
+      "same_exit": true,
+      "same_output": true,
+      "same_stderr": true,
+      "same_stdout": true,
+      "tool": "convert",
+      "wrapped": {
+        "artifact_sha256": "cf4c4db95ec867c9b0922d6a2c8c63cf30f53a5fd782c97a0d09ce48e869c88f",
+        "cid_reported": "",
+        "exit": 1,
+        "ms": 12,
+        "node": "c79d26491eaa3de8",
+        "os_arch": "linux-aarch64",
+        "output_cid": "",
+        "stderr_sha256": "6d1007d20301d5182ac12cc8236639c5e915dee3454d9c0da5f49aebc653b17e",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "version": "Version: ImageMagick 6.9.11-60 Q16 aarch64 2021-01-25 https://imagemagick.org"
+      }
+    },
+    {
+      "argv": [
+        "pandoc",
+        "--sandbox",
+        "in.md",
+        "-f",
+        "gfm",
+        "-t",
+        "html"
+      ],
+      "argv_match": true,
+      "case": "Markdown to HTML (stdout)",
+      "local": {
+        "artifact_sha256": "3f2503af9433608c81c28ae888af87ea07dc688b57ac7f305afe31311ef7bc17",
+        "exit": 0,
+        "node": "c79d26491eaa3de8",
+        "os_arch": "linux-aarch64",
+        "output_cid": "",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_sha256": "bce1855d5722b298a9528dd21f0c5ffe5f877c60f53ed3b468cd9fd43756db12",
+        "version": "pandoc 3.6.4"
+      },
+      "same_exit": true,
+      "same_output": true,
+      "same_stderr": true,
+      "same_stdout": true,
+      "tool": "pandoc",
+      "wrapped": {
+        "artifact_sha256": "3f2503af9433608c81c28ae888af87ea07dc688b57ac7f305afe31311ef7bc17",
+        "cid_reported": "",
+        "exit": 0,
+        "ms": 49,
+        "node": "c79d26491eaa3de8",
+        "os_arch": "linux-aarch64",
+        "output_cid": "",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_sha256": "bce1855d5722b298a9528dd21f0c5ffe5f877c60f53ed3b468cd9fd43756db12",
+        "version": "pandoc 3.6.4"
+      }
+    },
+    {
+      "argv": [
+        "pandoc",
+        "--sandbox",
+        "in.md",
+        "-f",
+        "markdown",
+        "-t",
+        "rst",
+        "-o",
+        "out.rst"
+      ],
+      "argv_match": true,
+      "case": "Markdown to reStructuredText",
+      "local": {
+        "artifact_sha256": "3f2503af9433608c81c28ae888af87ea07dc688b57ac7f305afe31311ef7bc17",
+        "exit": 0,
+        "node": "c79d26491eaa3de8",
+        "os_arch": "linux-aarch64",
+        "output_cid": "sha256:ee60464fa7a560dd1b11f512ad4a5105c926a68df8d3d9e9d826e1f351f635fc",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "version": "pandoc 3.6.4"
+      },
+      "same_exit": true,
+      "same_output": true,
+      "same_stderr": true,
+      "same_stdout": true,
+      "tool": "pandoc",
+      "wrapped": {
+        "artifact_sha256": "3f2503af9433608c81c28ae888af87ea07dc688b57ac7f305afe31311ef7bc17",
+        "cid_reported": "sha256:ee60464fa7a560dd1b11f512ad4a5105c926a68df8d3d9e9d826e1f351f635fc",
+        "exit": 0,
+        "ms": 21,
+        "node": "c79d26491eaa3de8",
+        "os_arch": "linux-aarch64",
+        "output_cid": "sha256:ee60464fa7a560dd1b11f512ad4a5105c926a68df8d3d9e9d826e1f351f635fc",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "version": "pandoc 3.6.4"
+      }
+    },
+    {
+      "argv": [
+        "jq",
+        "-c",
+        "[.ducks[] | select(.age > 1) | .name]",
+        "in.json"
+      ],
+      "argv_match": true,
+      "case": "filter",
+      "local": {
+        "artifact_sha256": "7783b0cb91736bb073d0cdeac6e3e05464abb0a5bddc235d03dd2cabad4aa080",
+        "exit": 0,
+        "node": "c79d26491eaa3de8",
+        "os_arch": "linux-aarch64",
+        "output_cid": "",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_sha256": "46fc8ef713fbed73d2a93ec401d643914be2d747c3044680f869af9a6e3ef932",
+        "version": "jq-1.6"
+      },
+      "same_exit": true,
+      "same_output": true,
+      "same_stderr": true,
+      "same_stdout": true,
+      "tool": "jq",
+      "wrapped": {
+        "artifact_sha256": "7783b0cb91736bb073d0cdeac6e3e05464abb0a5bddc235d03dd2cabad4aa080",
+        "cid_reported": "",
+        "exit": 0,
+        "ms": 39,
+        "node": "c79d26491eaa3de8",
+        "os_arch": "linux-aarch64",
+        "output_cid": "",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_sha256": "46fc8ef713fbed73d2a93ec401d643914be2d747c3044680f869af9a6e3ef932",
+        "version": "jq-1.6"
+      }
+    },
+    {
+      "argv": [
+        "jq",
+        ".",
+        "in.json"
+      ],
+      "argv_match": true,
+      "case": "invalid JSON (error path)",
+      "local": {
+        "artifact_sha256": "7783b0cb91736bb073d0cdeac6e3e05464abb0a5bddc235d03dd2cabad4aa080",
+        "exit": 4,
+        "node": "c79d26491eaa3de8",
+        "os_arch": "linux-aarch64",
+        "output_cid": "",
+        "stderr_sha256": "648371d03d094d62ab5aae590b2b3eaaf7637dc6a59ee2a6197efdaa381c271b",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "version": "jq-1.6"
+      },
+      "same_exit": true,
+      "same_output": true,
+      "same_stderr": true,
+      "same_stdout": true,
+      "tool": "jq",
+      "wrapped": {
+        "artifact_sha256": "7783b0cb91736bb073d0cdeac6e3e05464abb0a5bddc235d03dd2cabad4aa080",
+        "cid_reported": "",
+        "exit": 4,
+        "ms": 40,
+        "node": "c79d26491eaa3de8",
+        "os_arch": "linux-aarch64",
+        "output_cid": "",
+        "stderr_sha256": "648371d03d094d62ab5aae590b2b3eaaf7637dc6a59ee2a6197efdaa381c271b",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "version": "jq-1.6"
+      }
+    }
+  ],
+  "label": "one machine, through the mesh (aarch64 \u2192 aarch64)",
+  "when": "2026-11-15"
+}
