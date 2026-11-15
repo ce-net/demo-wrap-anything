@@ -8,7 +8,7 @@ import { fileURLToPath } from 'node:url';
 
 const root = path.dirname(fileURLToPath(import.meta.url));
 const port = Number(process.argv[2] || 8977);
-const [dh, dp] = (process.argv[3] || '127.0.0.1:7792').split(':');
+const [dh, dp] = (process.argv[3] || process.env.WIRE_WS_ADDR || '127.0.0.1:7792').split(':'); // cell.toml of wire.ws-door
 const types = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.json': 'application/json', '.css': 'text/css', '.woff2': 'font/woff2', '.png': 'image/png' };
 
 const server = http.createServer((req, res) => {
